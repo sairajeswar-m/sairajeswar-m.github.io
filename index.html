@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Sai Rajeswar</title>
+<meta content="Sai Rajeswar — Research lead studying enterprise agents, terminal agents, digital-world simulations, and world models for generally capable machines." name="description"/>
+<link href="https://sairajeswar.github.io/" rel="canonical"/>
+<style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --text: #141414;
+      --muted: #555b66;
+      --faint: #777f8d;
+      --line: #e6e8ec;
+      --soft: #f7f8fa;
+      --accent: #1f5fd0;
+      --accent-dark: #17479b;
+      --accent-soft: #edf4ff;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    a:hover { color: var(--accent-dark); text-decoration: underline; }
+
+    .page-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 44px 24px 72px;
+      display: grid;
+      grid-template-columns: 272px minmax(0, 1fr);
+      gap: 56px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 32px;
+      height: calc(100vh - 64px);
+      align-self: start;
+      overflow: auto;
+      padding: 4px 2px 24px;
+      border-right: 1px solid var(--line);
+    }
+
+    .profile-photo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 0 22px;
+      border: 1px solid var(--line);
+    }
+
+    .sidebar h1 {
+      margin: 0;
+      font-size: 1.85rem;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 760;
+    }
+    .sidebar .role {
+      margin: 12px 0 6px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 220px;
+      line-height: 1.48;
+    }
+    .sidebar .location {
+      margin: 0 0 20px;
+      font-size: 0.9rem;
+      color: var(--faint);
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 30px;
+    }
+    .socials a {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      transition: transform 160ms ease, background 160ms ease;
+    }
+    .socials a:hover { transform: translateY(-1px); background: var(--accent-soft); }
+    .socials img { width: 19px; height: 19px; object-fit: contain; display: block; }
+
+    .side-nav {
+      display: grid;
+      gap: 3px;
+      margin: 26px 0 22px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .side-nav a {
+      color: #2e3440;
+      font-size: 0.94rem;
+      padding: 7px 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 650;
+    }
+    .side-nav a:hover { color: var(--accent); text-decoration: none; }
+    .side-nav span { color: #a5abb5; font-weight: 700; }
+
+    .sidebar-footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.82rem;
+      max-width: 220px;
+    }
+
+    main { min-width: 0; max-width: 850px; }
+    .hero {
+      padding: 0 0 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-weight: 780;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hero h2 {
+      margin: 0 0 24px;
+      max-width: 780px;
+      font-size: clamp(2.25rem, 6vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+      font-weight: 780;
+    }
+    .hero p {
+      max-width: 760px;
+      color: #3f4652;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      margin: 0 0 18px;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0 12px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #232a35;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .button.primary { background: var(--text); color: white; border-color: var(--text); }
+    .button:hover { text-decoration: none; border-color: #c8ced8; }
+
+    section { scroll-margin-top: 30px; margin-top: 48px; }
+    .section-title {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      margin: 0 0 18px;
+    }
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 780;
+    }
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 570px;
+      font-size: 0.98rem;
+    }
+
+    .news-panel, .focus-grid, .paper-list, .note-panel { border-top: 1px solid var(--line); }
+    .news-panel { padding-top: 6px; }
+    .news-list { list-style: none; margin: 0; padding: 0; }
+    .news-list li {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 18px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      color: #333945;
+    }
+    .news-date {
+      font-weight: 720;
+      color: var(--faint);
+      font-size: 0.9rem;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .focus-grid {
+      padding-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .focus-card {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .focus-card h3 {
+      margin: 0;
+      font-size: 1.02rem;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+    }
+    .focus-card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+
+    .paper-list { padding-top: 2px; }
+    .paper-card {
+      display: grid;
+      grid-template-columns: 172px minmax(0, 1fr);
+      gap: 22px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+    .paper-card:last-child { border-bottom: 0; }
+    .paper-thumb {
+      display: block;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      aspect-ratio: 16 / 10;
+    }
+    .paper-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 180ms ease;
+    }
+    .paper-card:hover .paper-thumb img { transform: scale(1.02); }
+    .paper-body h3 {
+      margin: 4px 0 8px;
+      font-size: 1.04rem;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      font-weight: 650;
+    }
+    .paper-body p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.62; }
+    .paper-kicker {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--faint);
+      font-size: 0.76rem;
+      font-weight: 780;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+    mark {
+      background: transparent !important;
+      color: var(--accent-dark) !important;
+      padding: 0;
+      font-weight: 760;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      border: 1px solid #d5e4ff;
+      font-size: 0.72rem;
+      font-weight: 760;
+      letter-spacing: 0.02em;
+    }
+
+    .note-panel {
+      padding: 22px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .note-panel strong { color: var(--text); }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px 36px 352px;
+      color: var(--faint);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 980px) {
+      .page-shell { grid-template-columns: 1fr; gap: 28px; padding-top: 24px; }
+      .sidebar {
+        position: relative;
+        top: 0;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 108px minmax(0, 1fr);
+        gap: 18px;
+        padding-bottom: 26px;
+      }
+      .profile-photo { width: 104px; height: 104px; margin: 0; grid-row: span 3; }
+      .sidebar h1, .sidebar .role, .sidebar .location { text-align: left; max-width: none; }
+      .socials { justify-content: flex-start; margin-bottom: 16px; }
+      .side-nav { grid-column: 1 / -1; grid-template-columns: repeat(2, 1fr); }
+      .sidebar-footer { grid-column: 1 / -1; max-width: none; }
+      main { max-width: none; }
+      footer { padding-left: 24px; }
+    }
+
+    @media (max-width: 700px) {
+      .page-shell { padding-left: 18px; padding-right: 18px; }
+      .hero h2 { font-size: clamp(2.15rem, 13vw, 3.3rem); }
+      .hero p { font-size: 1rem; }
+      .section-title, .focus-card, .paper-card { grid-template-columns: 1fr; gap: 10px; }
+      .news-list li { grid-template-columns: 1fr; gap: 2px; }
+      .paper-thumb { aspect-ratio: 16 / 8.5; }
+      .side-nav { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+<div class="page-shell">
+<aside aria-label="Profile sidebar" class="sidebar">
+<img alt="Sai Rajeswar" class="profile-photo" src="assets/img/1777336306291.png"/>
+<h1>Sai Rajeswar</h1>
+<p class="role">Staff Research Scientist &amp; Research Lead<br/>ServiceNow Research</p>
+<p class="location">Montréal · Mila · Enterprise AI</p>
+<div aria-label="External profile links" class="socials">
+<a href="https://www.linkedin.com/in/sairajeswar/" rel="noreferrer noopener" target="_blank" title="LinkedIn"><img alt="LinkedIn" src="assets/img/LinkedIn_icon_circle.svg_.webp"/></a>
+<a href="https://twitter.com/RajeswarSai" rel="noreferrer noopener" target="_blank" title="X"><img alt="X" src="assets/img/x-twitter.svg"/></a>
+<a href="https://scholar.google.ca/citations?user=h-sqIigAAAAJ&amp;hl=en" rel="noreferrer noopener" target="_blank" title="Google Scholar"><img alt="Google Scholar" src="assets/img/Google_Scholar_logo.svg_.png"/></a>
+<a href="mailto:rajsai24@gmail.com" title="Email"><img alt="Email" src="assets/img/GMAIL.webp"/></a>
+</div>
+<nav aria-label="Section navigation" class="side-nav">
+<a href="#about">About <span>→</span></a>
+<a href="#news">News <span>→</span></a>
+<a href="#focus">Research Focus <span>→</span></a>
+<a href="#publications">Selected Research <span>→</span></a>
+<a href="https://scholar.google.ca/citations?hl=en&amp;user=h-sqIigAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" rel="noreferrer noopener" target="_blank">Google Scholar <span>↗</span></a>
+<a href="https://enterpriseops-gym.github.io/" rel="noreferrer noopener" target="_blank">EnterpriseOps-Gym <span>↗</span></a>
+</nav>
+<div class="sidebar-footer">Research in enterprise agents, world models, multimodal perception, and simulation.</div>
+</aside>
+<main>
+<section class="hero" id="about">
+<span class="eyebrow">Enterprise Agents · Terminal Agents · World Models · Simulation</span>
+<h2>Building agents that understand and act in digital worlds.</h2>
+<p>I am a Staff Research Scientist and Research Lead at ServiceNow Research, an Adjunct Professor, and a core industry member at <a href="https://mila.quebec/en/directory/sai-rajeswar-mudumba" rel="noreferrer noopener" target="_blank">Mila</a> Montréal. My group studies generally intelligent machines that understand, reason, and act in the world, especially the digital worlds where today’s AI systems will first become useful.</p>
+<p>Our starting point is long-horizon operations: software, terminals, documents, screens, workflows and multi-agent organizations. We look for the hard problems hidden in real data, then build simulated environments and worlds where agents can learn, fail, adapt, and be measured.</p>
+<p>This connects multimodal perception, terminal and computer-use agents, reinforcement learning, enterprise simulations, and world-model-based evaluation. The goal is practical and scientific: reliable AI for real work, and digital ecosystems that serve as laboratories for understanding the principles of intelligence itself.</p>
+<p>I obtained my Ph.D. at <a href="https://mila.quebec/en/" rel="noreferrer noopener" target="_blank">Mila</a> / Université de Montréal, supervised by Prof. <a href="https://mila.quebec/en/person/aaron-courville/" rel="noreferrer noopener" target="_blank">Aaron Courville</a>, and spent time as a Research Scientist Intern at <a href="https://deepmind.google/" rel="noreferrer noopener" target="_blank">Google DeepMind</a>. Previously, I completed my Master’s in Computer Science at <a href="https://home.iitd.ac.in/" rel="noreferrer noopener" target="_blank">IIT Delhi</a>.</p>
+<div class="hero-actions">
+<a class="button primary" href="#publications">View research</a>
+<a class="button" href="#news">Latest news</a>
+<a class="button" href="mailto:rajsai24@gmail.com">Contact</a>
+</div>
+</section>
+<section id="news">
+<div class="section-title">
+<h2>News</h2>
+<p>Recent releases, papers, and open-source milestones.</p>
+</div>
+<div class="news-panel">
+<ul class="news-list">
+<li><span class="news-date">2026/06</span><span>EnterpriseOps-Gym accepted to ICML 2026 — work on stateful enterprise agents, long-horizon planning, and realistic tool-use environments.</span></li>
+<li><span class="news-date">2026/06</span><span>Open-source enterprise AI artifacts crossed half a million downloads across GroundCUA, BigDocs, UI-Vision, and EnterpriseOps-Gym.</span></li>
+<li><span class="news-date">2026/02</span><span>GroundCUA released for grounding computer-use agents on human demonstrations.</span></li>
+</ul>
+</div>
+</section>
+<section id="focus">
+<div class="section-title">
+<h2>Key questions</h2>
+<p>The first-principles problems behind generally capable digital agents.</p>
+</div>
+<div class="focus-grid">
+<article class="focus-card">
+<h3>Digital world models</h3>
+<p>How can agents build predictive models of enterprise software, terminals, databases, policies, and organizations — and use those models to plan by imagining consequences?</p>
+</article>
+<article class="focus-card">
+<h3>Long-horizon agency</h3>
+<p>How can agents decompose work into subgoals, adapt to hidden state, recover from mistakes, and coordinate across tools, workflows, and people?</p>
+</article>
+<article class="focus-card">
+<h3>Scalable simulation</h3>
+<p>How can rich digital ecosystems become laboratories where agents practice, self-improve, and reveal the true gaps between benchmark capability and operational intelligence?</p>
+</article>
+</div>
+</section>
+<section id="publications">
+<div class="section-title">
+<h2>Highlighted work</h2>
+<p>Selected projects and papers. See <a href="https://scholar.google.ca/citations?hl=en&amp;user=h-sqIigAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" rel="noreferrer noopener" target="_blank">Google Scholar</a> for the full publication list.</p>
+</div>
+<div class="paper-list">
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/announcement-enterpriseops-1024x446.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research <span class="badge">ICML 2026</span></div>
+<h3><strong>EnterpriseOps-Gym: Environments and Evaluations for Stateful Agentic Planning and Tool Use in Enterprise Settings</strong>. <mark>ICML 2026</mark>. <a href="https://arxiv.org/pdf/2603.13594" rel="noreferrer noopener" target="_blank">Paper</a>, <a href="https://enterpriseops-gym.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<p>We study whether agents are ready for real enterprise work. <br>Reliable automation is still far from solved. We released our largest, most realistic environment to evaluate long-horizon agent planning tool execution under real enterprise constraints.</br></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2026-04-04-at-11.38.59-PM-1024x459.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>Terminal Agents Suffice for Enterprise Automation.</strong> <strong><mark>under review</mark></strong>. <a href="https://huggingface.co/papers/2604.00073" rel="noreferrer noopener" target="_blank">Paper</a></h3>
+<p>Terminal-based coding agents with direct API access match or outperform complex MCP and GUI agents, proving that strong foundation models need only simple programmatic interfaces for enterprise automation. Terminal agents achieve the same accuracy as web agents but are 5 to 6x cheaper and outperform MCP agents while staying cost-neutral.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2026-02-28-at-5.02.59-PM-1024x313.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research <span class="badge">ICLR 2026</span></div>
+<h3><strong>Grounding Computer Use Agents on Human Demonstrations</strong>.            <strong><mark>ICLR 2026</mark></strong>. <a href="https://arxiv.org/abs/2511.07332" rel="noreferrer noopener" target="_blank">Paper</a></h3>
+<p>Building reliable computer-use agents requires accurately connecting natural language instructions to the correct on-screen elements. We introduce GroundCUA, large-scale dataset &amp; GroundNext family of models.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2026-02-28-at-11.31.35-PM-1-1024x351.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research <span class="badge">NeurIPS 2025</span></div>
+<h3><strong>AlignVLM: Bridging Vision and Language Latent Spaces for Multimodal Understanding</strong>. <strong><mark>NeurIPS 2025</mark></strong>. <a href="https://arxiv.org/abs/2502.01341" rel="noreferrer noopener" target="_blank">Paper</a></h3>
+<p>A novel approach to bridging vision and language latent spaces for multimodal understanding in VLMs that  maps vision features into a weighted average of LLM text embeddings, ensuring they remain in a space that the LLM can effectively interpret.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-22-at-11.21.28-AM-1024x209.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>WebMMU: A Multimodal, Multilingual Benchmark for Website Understanding &amp; Code Generation</strong>. <strong><mark>EMNLP 2025 (Oral)</mark></strong>. <a href="https://webmmu-paper.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<p>Address a critical gap in AI evals: how well can models understand and build websites. Unlike many recent works, we collected a real-world, challenging dataset with 117 expert annotators across diverse domains. It is multilingual.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-19-at-9.46.21-PM-1024x335.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>BigCharts-R1: Enhanced Chart Reasoning with  Visual  Reinforcement  Finetuning</strong>. <strong><mark>CoLM 2025.</mark></strong> <a href="https://bigcharts.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<p>Chart comprehension is crucial for effective human decision-making, yet current VLMs struggle with this task due to limitations in training data and methodologies. We introduce BigCharts-R1, a state-of-the-art chart reasoning model, alongside a novel dataset and training framework.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-20-at-11.57.00-AM-1024x293.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research <span class="badge">ICML 2025</span></div>
+<h3><strong>UI-Vision: A Desktop-centric GUI Benchmark for Visual Perception and Interaction</strong>. <strong><mark>ICML 2025</mark></strong>. <a href="https://uivision.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<p>first comprehensive, license-permissive benchmark for offline, fine-grained evaluation of CUA agents in real-world desktops. We provides: (i) dense, high-quality annotations of human demonstrations, including bounding boxes, UI labels, and action trajectories across 83 software applications.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-19-at-9.52.09-PM-1024x332.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>BigDocs: An Open Dataset for Training Multimodal Models on Document and Code Tasks</strong>. <strong><mark>ICLR 2025. </mark></strong><a href="https://bigdocs.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<p>BigDocs is a multimodal dataset effort for advanced document understanding, consisting of two key components: BigDocs-7.5M: A high-quality, open-access, large-scale dataset of 7.5 million multimodal documents spanning 30 tasks BigDocs-Bench: A benchmark suite with 10 real-world-inspired tasks like reasoning over graphical user interfaces (GUI).</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-07-05-at-12.12.08 AM-1024x397.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>GenRL:</strong> <strong>MULTIMODAL FOUNDATION WORLD MODELS FOR GENERALIST EMBODIED AGENTS</strong>. <strong><mark>NeurIPS 2024</mark></strong></h3>
+<p>GenRL allows one to specify tasks through vision and/or language prompts, ground them in the embodied domain’s dynamics, and learns the corresponding behaviors in imagination. This exhibits strong multi-task generalization in locomotion and manipulation domains. <a href="https://arxiv.org/abs/2406.18043" rel="noreferrer noopener" target="_blank">Read more.</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-20-at-11.43.34-AM-1024x282.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research <span class="badge">NeurIPS 2025</span></div>
+<h3><strong>Rendering-Aware Reinforcement Learning for Vector Graphics Generation. <mark>NeurIPS 2025</mark></strong></h3>
+<p>RL way to enhances SVG generation in autoregressive VLMs by leveraging feedback from rendered SVG outputs. SVG roll-outs are rendered and compared to original image to compute a reward. This visual fidelity feedback guides model to produce more semantically coherent SVGs.</p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/starvector-teaser-2.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>StarVector: Generating Scalable Vector Graphics Code From Images And Text <mark>CVPR 2025</mark></strong></h3>
+<p>GenRL allows one to specify tasks through vision and/or language prompts, ground them in the embodied domain’s dynamics, and learns the corresponding behaviors in imagination. This exhibits strong multi-task generalization in locomotion and manipulation domains. <a href="https://arxiv.org/abs/2406.18043" rel="noreferrer noopener" target="_blank">Read more.</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-08-16-at-2.21.03 PM-1-1024x397.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>REPRESENTING POSITIONAL INFORMATION IN GENERATIVE WORLD MODELS FOR OBJECT MANIPULATION</strong></h3>
+<p>We introduce a general approach that empowers world model-based agents to effectively solve object-positioning tasks. We propose two declinations of this approach for generative world models: position-conditioned (PCP) and latent-conditioned (LCP) policy learning <a href="https://openreview.net/attachment?id=WEvQSpwsBJ&amp;name=pdf" rel="noreferrer noopener" target="_blank">Read more.</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-04-17-at-8.46.34-PM-1024x317.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>EQUIVARIANT ADAPTATION OF LARGE PRETRAINED MODELS</strong>. <strong><mark>NeurIPS 2023</mark></strong></h3>
+<p>Equivariant networks are specifically designed to ensure consistent behavior with respect to a set of input transformations, leading to higher sample efficiency and more accurate and robust predictions.  <a href="https://proceedings.neurips.cc/paper_files/paper/2023/file/9d5856318032ef3630cb580f4e24f823-Paper-Conference.pdf" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-04-17-at-9.05.43-PM-1024x352.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>THE UNSOLVED CHALLENGES OF LLMS AS GENERALIST WEB AGENTS: A CASE STUDY</strong></h3>
+<p>In this work, we investigate the challenges associated with developing goal-driven AI agents capable of performing novel tasks in a web environment using zero-shot learning. Our primary focus is on harnessing the capabilities of large language models (LLMs) as generalist web agents interacting with HTML-based user interfaces (UIs). <a href="https://openreview.net/pdf?id=jt3il4fC5B" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.19.43 AM-1024x256.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>MASTERING UNSUPERVISED REINFORCEMENT LEARNING FROM PIXELS</strong>. <strong><mark>ICML 2023</mark></strong> (Oral)</h3>
+<p>In this work, we study the URLB and propose a new method<br/>to solve it, using unsupervised model-based RL, for pre-training the agent, and a task-aware finetuning strategy combined with a new proposed hybrid planner, Dyna-MPC, to adapt the agent for downstream tasks. <a href="https://proceedings.mlr.press/v202/rajeswar23a" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.52.00 AM-1024x387.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>CHOREOGRAPHER: LEARNING &amp; ADAPTING SKILLS IN IMAGINATION</strong>. <strong><mark>ICLR 2024</mark></strong> (Spotlight)</h3>
+<p>a model-based agent that exploits its world model to learn and adapt skills in imagination. We decouple the exploration and skill learning processes, being able to discover skills in the latent state space. During adaptation, the agent uses a meta-controller to evaluate and adapt the learned skills efficiently by deploying them in parallel in imagination. <a href="https://arxiv.org/pdf/2211.13350" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.57.32 AM-1024x403.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>EFFICIENT DYNAMICS MODELING IN INTERACTIVE ENVIRONMENTS WITH KOOPMAN THEORY</strong>, <strong><mark>ICLR 2024</mark></strong></h3>
+<p>We approach this problem from the lens of Koopman theory, where the<br/>nonlinear dynamics of the environment can be linearized in a high-dimensional latent space. This allows us to efficiently parallelize the sequential problem of long-range prediction using convolution while accounting for the agent’s action at every time step. <a href="https://arxiv.org/pdf/2306.11941" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-10-04-at-7.11.13-PM-1024x355.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>Multi-label Iterated Learning for Image Classification with Label Ambiguity</strong>, <strong><mark>CVPR 2022</mark></strong></h3>
+<p>Transfer learning from large-scale pre-trained models has become essential for many computer vision tasks. Recent studies have shown that datasets like ImageNet are weakly labeled since images with multiple object classes present are assigned a single label. Inspired by language emergence literature, we propose MILe to incorporate the inductive biases of multi-label learning from single labels using iterated learning. <a href="https://arxiv.org/pdf/2111.12172" rel="noreferrer noopener" target="_blank">Read more</a></p>
+</div>
+</article>
+<article class="paper-card">
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-10-22-at-12.01.04-PM-1024x254.png"/></div>
+<div class="paper-body">
+<div class="paper-kicker">Selected research </div>
+<h3><strong>Touch based Curiosity for Sparse-Reward Tasks</strong>, <strong><mark>CoRL 2023</mark></strong></h3>
+<p>we leverage surprise from mismatches in touch feedback to guide exploration in hard sparse-reward reinforcement learning tasks. Our approach, Touch-based Curiosity (ToC), learns what visible objects interactions are supposed to “feel” like. We encourage exploration by rewarding interactions where the experience do not match. We test on a range of touch-intensive robot tasks (e.g. pushing objects, opening doors) </p>
+</div>
+</article>
+</div>
+</section>
+<section id="contact">
+<div class="note-panel"><strong>Collaboration:</strong> I am excited to work with students, interns, and collaborators interested in enterprise agents, terminal/computer-use agents, digital-world simulations, and world models for reliable intelligence.</div>
+</section>
+</main>
+</div>
+<footer>© Sai Rajeswar. Static personal website on GitHub Pages.</footer>
+</body>
+</html>
