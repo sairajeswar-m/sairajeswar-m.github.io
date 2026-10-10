@@ -200,46 +200,139 @@
       font-size: 0.98rem;
     }
 
-    .news-panel, .focus-grid, .paper-list, .note-panel { border-top: 1px solid var(--line); }
-    .news-panel { padding-top: 6px; }
-    .news-list { list-style: none; margin: 0; padding: 0; }
-    .news-list li {
-      display: grid;
-      grid-template-columns: 88px minmax(0, 1fr);
-      gap: 18px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--line);
-      color: #333945;
+    /* ---------- Research map ---------- */
+    .map { border-top: 1px solid var(--line); padding-top: 22px; }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 22px;
     }
-    .news-date {
+    .flow-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      font-size: 0.86rem;
       font-weight: 720;
-      color: var(--faint);
-      font-size: 0.9rem;
+      color: #2e3440;
       white-space: nowrap;
-      font-variant-numeric: tabular-nums;
     }
+    .flow-step i {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--c);
+      display: inline-block;
+    }
+    .flow-arrow { color: #b4bac4; font-weight: 700; }
 
-    .focus-grid {
-      padding-top: 18px;
+    .stats {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0 0 22px;
     }
-    .focus-card {
-      display: grid;
-      grid-template-columns: 190px minmax(0, 1fr);
-      gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--line);
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
     }
-    .focus-card h3 {
-      margin: 0;
-      font-size: 1.02rem;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
+    .stat b {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      font-weight: 780;
+      color: var(--text);
     }
-    .focus-card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+    .stat span { display: block; margin-top: 5px; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
 
+    .modules {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .module {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 18px 10px;
+      background: #fff;
+      overflow: hidden;
+      transition: box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+    }
+    .module::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: var(--c);
+    }
+    .module:hover {
+      box-shadow: 0 14px 34px rgba(20, 28, 45, 0.08);
+      transform: translateY(-2px);
+      border-color: #d8dde5;
+    }
+    .module.wide { grid-column: 1 / -1; }
+    .module-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .module-icon {
+      flex: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: var(--cs);
+      color: var(--c);
+    }
+    .module-icon svg { width: 20px; height: 20px; }
+    .module h3 { margin: 0; font-size: 1.02rem; letter-spacing: -0.02em; line-height: 1.25; }
+    .module .count { margin-left: auto; font-size: 0.74rem; font-weight: 760; color: var(--c); background: var(--cs); padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+    .module .thesis { margin: 0 0 8px; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+
+    .items { list-style: none; margin: 0; padding: 0; }
+    .module.wide .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; }
+    .items li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .items .name { font-weight: 700; font-size: 0.93rem; color: var(--text); line-height: 1.35; }
+    .items .name a { color: var(--text); }
+    .items .name a:hover { color: var(--c); text-decoration: none; }
+    .items .meta { grid-column: 1 / -1; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
+    .venue {
+      font-size: 0.7rem;
+      font-weight: 780;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      padding: 1px 8px;
+      border-radius: 999px;
+      color: var(--c);
+      background: var(--cs);
+    }
+    .venue.wip { color: #8a5a00; background: #fff4dc; }
+
+    .m-ent   { --c: #1f5fd0; --cs: #edf4ff; }
+    .m-cua   { --c: #12805a; --cs: #e8f6ef; }
+    .m-data  { --c: #b2650f; --cs: #fff3e2; }
+    .m-model { --c: #6a4cd6; --cs: #f1edff; }
+    .m-wm    { --c: #0d7f86; --cs: #e5f6f6; }
+
+    .map-note { margin: 14px 0 0; color: var(--faint); font-size: 0.82rem; }
+
+    /* ---------- Publications ---------- */
+    .paper-list, .note-panel { border-top: 1px solid var(--line); }
     .paper-list { padding-top: 2px; }
     .paper-card {
       display: grid;
@@ -341,14 +434,24 @@
       footer { padding-left: 24px; }
     }
 
+    @media (max-width: 760px) {
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .modules { grid-template-columns: 1fr; }
+      .module.wide .items { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 700px) {
       .page-shell { padding-left: 18px; padding-right: 18px; }
       .hero h2 { font-size: clamp(1.9rem, 10vw, 2.75rem); }
       .hero p { font-size: 1rem; }
-      .section-title, .focus-card, .paper-card { grid-template-columns: 1fr; gap: 10px; }
-      .news-list li { grid-template-columns: 1fr; gap: 2px; }
+      .section-title, .paper-card { grid-template-columns: 1fr; gap: 10px; }
       .paper-thumb { aspect-ratio: 16 / 8.5; }
       .side-nav { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .module, .paper-thumb img, .socials a { transition: none; }
+      .module:hover { transform: none; }
     }
 </style>
 </head>
@@ -367,8 +470,7 @@
 </div>
 <nav aria-label="Section navigation" class="side-nav">
 <a href="#about">About <span>→</span></a>
-<a href="#news">News <span>→</span></a>
-<a href="#focus">Research Focus <span>→</span></a>
+<a href="#map">Research Map <span>→</span></a>
 <a href="#publications">Selected Research <span>→</span></a>
 <a href="https://scholar.google.ca/citations?hl=en&amp;user=h-sqIigAAAAJ&amp;view_op=list_works&amp;sortby=pubdate" rel="noreferrer noopener" target="_blank">Google Scholar <span>↗</span></a>
 <a href="https://enterpriseops-gym.github.io/" rel="noreferrer noopener" target="_blank">EnterpriseOps-Gym <span>↗</span></a>
@@ -377,43 +479,130 @@
 </aside>
 <main>
 <section class="hero" id="about">
-<span class="eyebrow"> Data & Evals · Environment Simulation · Enterprise AI </span>
+<span class="eyebrow"> Data &amp; Evals · Environment Simulation · Enterprise AI </span>
 <h2>Building systems that understand and act in digital worlds.</h2>
 <p>I lead a research group at <a href="https://www.servicenow.com/research/">ServiceNow Research</a> and am an Adjunct Professor and core industry member at <a href="https://mila.quebec/">Mila</a>, Montréal. I work on the data, benchmarks, and executable environments that decide what AI agents are trained and measured on, across documents, screens, terminals, and long-horizon enterprise workflows. Recent work includes <a href="https://arxiv.org/abs/2603.13594">EnterpriseOps-Gym</a> (ICML 2026), a stateful benchmark for agentic planning and tool use in enterprise systems, and <a href="https://proceedings.mlr.press/v267/nayak25a.html">UI-Vision</a> (ICML 2025), a desktop GUI benchmark for visual perception and interaction.</p>
 <p>My working premise is that evaluation directs optimization: whoever defines what counts as hard, and what counts as solved, sets the training agenda for everyone downstream. So I focus less on chasing model capability and more on the instruments that steer it, meaning benchmarks that isolate real failure modes, datasets grounded in genuine human demonstrations, and environments recovered from real systems where agents can act, fail, adapt, and be scored.</p>
 <p>I completed my Ph.D. at Mila / Université de Montréal under <a href="https://mila.quebec/en/person/aaron-courville/">Aaron Courville</a>, and spent time as a Research Scientist Intern at Google DeepMind. Before that, I studied computer science at IIT Delhi.</p>
 <div class="hero-actions">
-<a class="button primary" href="#publications">View research</a>
-<a class="button" href="#news">Latest news</a>
+<a class="button primary" href="#map">Research map</a>
+<a class="button" href="#publications">Selected research</a>
 <a class="button" href="mailto:rajsai24@gmail.com">Contact</a>
 </div>
 </section>
-<section id="news">
+
+<section id="map">
 <div class="section-title">
-<h2>News</h2>
-<p>Recent releases, papers, and open-source milestones.</p>
+<h2>Research map</h2>
+<p>One agenda in five modules: the data agents learn from, the benchmarks and environments they are measured in, and the models, harnesses and world models built on top.</p>
 </div>
-<div class="news-panel">
-<ul class="news-list">
-<li><span class="news-date">2026/07</span><span>Last week, EnterpriseOps-Gym reached a bigger stage: Artificial Analysis launched the EnterpriseOpsGym-AA leaderboard.</span></li>
-<li><span class="news-date">2026/06</span><span>EnterpriseOps-Gym accepted to ICML 2026 — work on stateful enterprise agents, long-horizon planning, and realistic tool-use environments.</span></li>
-<li><span class="news-date">2026/06</span><span>Open-source enterprise AI artifacts crossed half a million downloads across GroundCUA, BigDocs, UI-Vision, and EnterpriseOps-Gym.</span></li>
-<li><span class="news-date">2026/02</span><span>GroundCUA released for grounding computer-use agents on human demonstrations.</span></li>
+<div class="map">
+
+<div aria-label="How the work fits together" class="flow">
+<span class="flow-step m-data"><i></i>Data</span><span class="flow-arrow">→</span>
+<span class="flow-step m-cua"><i></i>Benchmarks</span><span class="flow-arrow">→</span>
+<span class="flow-step m-ent"><i></i>Environments</span><span class="flow-arrow">→</span>
+<span class="flow-step m-model"><i></i>Agents &amp; harnesses</span><span class="flow-arrow">→</span>
+<span class="flow-step m-wm"><i></i>World models &amp; RL</span>
+</div>
+
+<div class="stats">
+<div class="stat"><b>½M+</b><span>downloads of open data, benchmarks and models</span></div>
+<div class="stat"><b>12</b><span>top-venue papers in 2025–26</span></div>
+<div class="stat"><b>1st</b><span>enterprise-agent benchmark on the Artificial Analysis leaderboard</span></div>
+<div class="stat"><b>3.56M</b><span>human-verified UI element annotations, fully open</span></div>
+</div>
+
+<div class="modules">
+
+<article class="module wide m-ent">
+<div class="module-head">
+<div class="module-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"></ellipse><path d="M5 5.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"></path><path d="M5 11.5v6c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-6"></path></svg></div>
+<h3>Enterprise benchmarks &amp; environments</h3>
+<span class="count">5 works</span>
+</div>
+<p class="thesis">Stateful, policy-governed systems of record where agents act through tools and are graded on the final state of the world.</p>
+<ul class="items">
+<li><span class="name"><a href="https://arxiv.org/abs/2603.13594" rel="noreferrer noopener" target="_blank">EnterpriseOps-Gym</a></span><span class="venue">ICML 2026</span><span class="meta">1,150 expert tasks · 164 tables · 512 tools · tracked on the Artificial Analysis leaderboard</span></li>
+<li><span class="name"><a href="https://huggingface.co/papers/2604.00073" rel="noreferrer noopener" target="_blank">Terminal Agents Suffice (StarShell)</a></span><span class="venue">TMLR 2026</span><span class="meta">729 tasks across ServiceNow, GitLab and ERPNext · terminal vs GUI vs curated tools</span></li>
+<li><span class="name"><a href="https://arxiv.org/abs/2605.12178" rel="noreferrer noopener" target="_blank">Enterprise World Models (CascadeBench)</a></span><span class="venue">NeurIPS 2026</span><span class="meta">Can agents predict how business rules cascade? 64 worlds · real execution, synthetic schemas</span></li>
+<li><span class="name">EnterpriseOps-Gym V2</span><span class="venue wip">In progress</span><span class="meta">Generated enterprise worlds where tasks and verifiers come from the same executed run</span></li>
+<li><span class="name">Who Verifies the Verifier</span><span class="venue wip">In progress</span><span class="meta">Certifying benchmark graders, with soundness and mutation kill rates, before they become RL rewards</span></li>
 </ul>
-</div>
-</section>
-<section id="focus">
-<div class="section-title">
-<h2>Key questions</h2>
-<p>The first-principles problems behind generally capable digital agents.</p>
-</div>
-<div class="focus-grid">
-<article class="focus-card">
-<h3>Scalable simulation</h3>
-<p>Build the environments agents learn in. Post-training and self-improvement stop being hard the moment you have the right data and RL environments are how you manufacture it at scale.</p>
 </article>
+
+<article class="module m-cua">
+<div class="module-head">
+<div class="module-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="4"></rect><path d="M8 21h8M12 17v4"></path><path d="M13 9l4 2-2 .6-.6 2z"></path></svg></div>
+<h3>Computer-use benchmarks</h3>
+<span class="count">5 works</span>
+</div>
+<p class="thesis">Measuring whether agents can see and act on real screens: desktops, web apps and professional software.</p>
+<ul class="items">
+<li><span class="name"><a href="https://uivision.github.io/" rel="noreferrer noopener" target="_blank">UI-Vision</a></span><span class="venue">ICML 2025</span><span class="meta">Desktop GUI grounding · 83 applications · 8K+ query–box pairs</span></li>
+<li><span class="name"><a href="https://arxiv.org/abs/2511.07332" rel="noreferrer noopener" target="_blank">GroundCUA</a></span><span class="venue">ICLR 2026</span><span class="meta">Grounding agents on human demonstrations · 87 apps</span></li>
+<li><span class="name">CUA-Suite / VideoCUA</span><span class="venue">2026</span><span class="meta">55 hours of continuous expert video · 10K tasks · 87 professional apps</span></li>
+<li><span class="name"><a href="https://webmmu-paper.github.io/" rel="noreferrer noopener" target="_blank">WebMMU</a></span><span class="venue">EMNLP 2025 · Oral</span><span class="meta">Multilingual website understanding and code generation · 117 expert annotators</span></li>
+<li><span class="name"><a href="https://openreview.net/pdf?id=jt3il4fC5B" rel="noreferrer noopener" target="_blank">LLMs as Generalist Web Agents</a></span><span class="venue">Case study</span><span class="meta">The unsolved challenges of zero-shot agents on HTML interfaces</span></li>
+</ul>
+</article>
+
+<article class="module m-data">
+<div class="module-head">
+<div class="module-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4z"></path><path d="M4 12l8 4 8-4"></path><path d="M4 17l8 4 8-4"></path></svg></div>
+<h3>Open datasets</h3>
+<span class="count">6 releases</span>
+</div>
+<p class="thesis">Licensed, human-grounded data at scale: the raw material for training and measuring multimodal agents.</p>
+<ul class="items">
+<li><span class="name"><a href="https://bigdocs.github.io/" rel="noreferrer noopener" target="_blank">BigDocs-7.5M</a></span><span class="venue">ICLR 2025</span><span class="meta">7.5M documents · 30 tasks · license- and provenance-checked</span></li>
+<li><span class="name"><a href="https://arxiv.org/abs/2511.07332" rel="noreferrer noopener" target="_blank">GroundCUA data</a></span><span class="venue">ICLR 2026</span><span class="meta">3.56M human-verified UI annotations · 56K screenshots</span></li>
+<li><span class="name">VideoCUA</span><span class="venue">2026</span><span class="meta">6M frames of expert computer use, with cursor traces</span></li>
+<li><span class="name">SVG-Stack (with StarVector)</span><span class="venue">CVPR 2025</span><span class="meta">2.1M real, permissively licensed SVGs</span></li>
+<li><span class="name"><a href="https://servicenow.github.io/SynthDocBench/" rel="noreferrer noopener" target="_blank">SynthDocBench</a></span><span class="venue">COLM 2026</span><span class="meta">Controlled long-context document benchmark with independent difficulty axes</span></li>
+<li><span class="name"><a href="https://bigcharts.github.io/" rel="noreferrer noopener" target="_blank">BigCharts</a></span><span class="venue">CoLM 2025</span><span class="meta">Real-world charts, replotted for accurate labels</span></li>
+</ul>
+</article>
+
+<article class="module m-model">
+<div class="module-head">
+<div class="module-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><rect height="16" rx="2.5" width="18" x="3" y="4"></rect><path d="M7 10l3 2.5-3 2.5M12 15h5"></path></svg></div>
+<h3>Models, agents &amp; harnesses</h3>
+<span class="count">6 works</span>
+</div>
+<p class="thesis">Small, specialized models and simple agent interfaces that outperform larger general systems on the right data.</p>
+<ul class="items">
+<li><span class="name"><a href="https://arxiv.org/abs/2511.07332" rel="noreferrer noopener" target="_blank">GroundNext (3B / 7B)</a></span><span class="venue">ICLR 2026</span><span class="meta">State-of-the-art UI grounding with under a tenth of competitors' training data</span></li>
+<li><span class="name"><a href="https://huggingface.co/papers/2604.00073" rel="noreferrer noopener" target="_blank">Terminal agent harness</a></span><span class="venue">TMLR 2026</span><span class="meta">One flexible API interface matches GUI agents at a fraction of the cost</span></li>
+<li><span class="name">StarVector</span><span class="venue">CVPR 2025</span><span class="meta">Images and text to editable SVG code with a code LLM</span></li>
+<li><span class="name">RLRF</span><span class="venue">NeurIPS 2025</span><span class="meta">RL from rendering feedback: reward the render, not the tokens</span></li>
+<li><span class="name"><a href="https://arxiv.org/abs/2502.01341" rel="noreferrer noopener" target="_blank">AlignVLM</a></span><span class="venue">NeurIPS 2025</span><span class="meta">A vision–language connector that keeps visual tokens in the LLM's own word space</span></li>
+<li><span class="name"><a href="https://bigcharts.github.io/" rel="noreferrer noopener" target="_blank">BigCharts-R1</a></span><span class="venue">CoLM 2025</span><span class="meta">Chart reasoning with visual reinforcement fine-tuning</span></li>
+</ul>
+</article>
+
+<article class="module m-wm">
+<div class="module-head">
+<div class="module-icon"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17M12 3.5c2.6 2.8 2.6 14.2 0 17M12 3.5c-2.6 2.8-2.6 14.2 0 17"></path></svg></div>
+<h3>World models &amp; RL</h3>
+<span class="count">6 works</span>
+</div>
+<p class="thesis">Agents that imagine before they act, from pixels and robots to enterprise systems.</p>
+<ul class="items">
+<li><span class="name"><a href="https://arxiv.org/abs/2605.12178" rel="noreferrer noopener" target="_blank">Enterprise world models</a></span><span class="venue">NeurIPS 2026</span><span class="meta">Reading live rules beats memorizing dynamics for unseen companies</span></li>
+<li><span class="name"><a href="https://arxiv.org/abs/2406.18043" rel="noreferrer noopener" target="_blank">GenRL</a></span><span class="venue">NeurIPS 2024</span><span class="meta">Multimodal foundation world models for generalist embodied agents</span></li>
+<li><span class="name"><a href="https://arxiv.org/pdf/2211.13350" rel="noreferrer noopener" target="_blank">Choreographer</a></span><span class="venue">ICLR 2024 · Spotlight</span><span class="meta">Learning and adapting skills in imagination</span></li>
+<li><span class="name"><a href="https://arxiv.org/pdf/2306.11941" rel="noreferrer noopener" target="_blank">Koopman dynamics</a></span><span class="venue">ICLR 2024</span><span class="meta">Efficient long-range dynamics modeling in interactive environments</span></li>
+<li><span class="name"><a href="https://proceedings.mlr.press/v202/rajeswar23a" rel="noreferrer noopener" target="_blank">Unsupervised RL from pixels</a></span><span class="venue">ICML 2023 · Oral</span><span class="meta">Model-based pre-training with a hybrid Dyna-MPC planner</span></li>
+<li><span class="name">Touch-based curiosity</span><span class="venue">CoRL 2023</span><span class="meta">Exploration driven by mismatches in touch feedback</span></li>
+</ul>
+</article>
+
+</div>
+<p class="map-note">Venues shown are for the main publication; in-progress items are ongoing work.</p>
 </div>
 </section>
+
 <section id="publications">
 <div class="section-title">
 <h2>Highlighted work</h2>
@@ -425,7 +614,7 @@
 <div class="paper-body">
 <div class="paper-kicker">Selected research <span class="badge">ICML 2026</span></div>
 <h3><strong>EnterpriseOps-Gym: Environments and Evaluations for Stateful Agentic Planning and Tool Use in Enterprise Settings</strong>. <mark>ICML 2026</mark>. <a href="https://arxiv.org/pdf/2603.13594" rel="noreferrer noopener" target="_blank">Paper</a>, <a href="https://enterpriseops-gym.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
-<p>We study whether agents are ready for real enterprise work. <br>Reliable automation is still far from solved. We released our largest, most realistic environment to evaluate long-horizon agent planning tool execution under real enterprise constraints.</br></p>
+<p>We study whether agents are ready for real enterprise work. <br/>Reliable automation is still far from solved. We released our largest, most realistic environment to evaluate long-horizon agent planning tool execution under real enterprise constraints.</p>
 </div>
 </article>
 <article class="paper-card">
@@ -480,7 +669,7 @@
 <div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2025-09-19-at-9.46.21-PM-1024x335.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
-<h3><strong>BigCharts-R1: Enhanced Chart Reasoning with  Visual  Reinforcement  Finetuning</strong>. <strong><mark>CoLM 2025.</mark></strong> <a href="https://bigcharts.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
+<h3><strong>BigCharts-R1: Enhanced Chart Reasoning with  Visual  Reinforcement  Finetuning</strong>. <strong><mark>CoLM 2025.</mark></strong> <a href="https://bigcharts.github.io/" rel="noreferrer noopener" target="_blank">Page</a></h3>
 <p>Chart comprehension is crucial for effective human decision-making, yet current VLMs struggle with this task due to limitations in training data and methodologies. We introduce BigCharts-R1, a state-of-the-art chart reasoning model, alongside a novel dataset and training framework.</p>
 </div>
 </article>
@@ -501,7 +690,7 @@
 </div>
 </article>
 <article class="paper-card">
-<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-07-05-at-12.12.08 AM-1024x397.png"/></div>
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-07-05-at-12.12.08 AM-1024x397.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>GenRL:</strong> <strong>MULTIMODAL FOUNDATION WORLD MODELS FOR GENERALIST EMBODIED AGENTS</strong>. <strong><mark>NeurIPS 2024</mark></strong></h3>
@@ -521,11 +710,11 @@
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>StarVector: Generating Scalable Vector Graphics Code From Images And Text <mark>CVPR 2025</mark></strong></h3>
-<p>GenRL allows one to specify tasks through vision and/or language prompts, ground them in the embodied domain’s dynamics, and learns the corresponding behaviors in imagination. This exhibits strong multi-task generalization in locomotion and manipulation domains. <a href="https://arxiv.org/abs/2406.18043" rel="noreferrer noopener" target="_blank">Read more.</a></p>
+<p>StarVector generates editable SVG code directly from images and text using a code-pretrained language model, writing compact primitives instead of traced paths. It introduces SVG-Stack, a dataset of 2.1M real SVGs, and SVG-Bench for evaluating vector graphics generation.</p>
 </div>
 </article>
 <article class="paper-card">
-<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-08-16-at-2.21.03 PM-1-1024x397.png"/></div>
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-08-16-at-2.21.03 PM-1-1024x397.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>REPRESENTING POSITIONAL INFORMATION IN GENERATIVE WORLD MODELS FOR OBJECT MANIPULATION</strong></h3>
@@ -549,7 +738,7 @@
 </div>
 </article>
 <article class="paper-card">
-<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.19.43 AM-1024x256.png"/></div>
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.19.43 AM-1024x256.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>MASTERING UNSUPERVISED REINFORCEMENT LEARNING FROM PIXELS</strong>. <strong><mark>ICML 2023</mark></strong> (Oral)</h3>
@@ -557,7 +746,7 @@
 </div>
 </article>
 <article class="paper-card">
-<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.52.00 AM-1024x387.png"/></div>
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.52.00 AM-1024x387.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>CHOREOGRAPHER: LEARNING &amp; ADAPTING SKILLS IN IMAGINATION</strong>. <strong><mark>ICLR 2024</mark></strong> (Spotlight)</h3>
@@ -565,7 +754,7 @@
 </div>
 </article>
 <article class="paper-card">
-<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.57.32 AM-1024x403.png"/></div>
+<div class="paper-thumb"><img alt="Research preview" src="assets/img/Screenshot-2024-06-29-at-8.57.32 AM-1024x403.png"/></div>
 <div class="paper-body">
 <div class="paper-kicker">Selected research </div>
 <h3><strong>EFFICIENT DYNAMICS MODELING IN INTERACTIVE ENVIRONMENTS WITH KOOPMAN THEORY</strong>, <strong><mark>ICLR 2024</mark></strong></h3>
