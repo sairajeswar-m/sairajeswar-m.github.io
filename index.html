@@ -97,7 +97,7 @@ footer{max-width:900px;margin:0 auto;padding:0 24px 40px;color:var(--faint);font
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin: 0 0 22px;
     }
@@ -194,7 +194,15 @@ footer{max-width:900px;margin:0 auto;padding:0 24px 40px;color:var(--faint);font
 
     .map-note { margin: 14px 0 0; color: var(--faint); font-size: 0.82rem; }
 
-    </style>
+    
+    @media (max-width: 760px) {
+      .modules { grid-template-columns: 1fr; }
+      .module.wide .items { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .stats { grid-template-columns: 1fr; }
+    }
+</style>
 </head>
 <body><header class="topbar"><div class="topbar-inner">
 <a class="brand" href="index.html">Sai Rajeswar</a>
